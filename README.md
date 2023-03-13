@@ -1,6 +1,6 @@
-# Job Applcation Portal
+# Job Application Portal
 
-Designed and developed Job  Applcation Portal using Python, Django Framework, Bootstrap and MySQL as part of a Web Application. Created functionalities for Admin roles. 
+Designed and developed Job  Application Portal using Python, Django Framework, Bootstrap and MySQL as part of a Web Application. Created functionalities for Admin roles. 
 
 ## Functionalities
 ```
@@ -13,6 +13,7 @@ Admin can:
 ```
 
 ## Getting Started
+
 * Python 3+
 * MySQL
 * Django
@@ -27,6 +28,7 @@ Admin can:
 ```
 
 ## Run
+
 * Activate virtual environment and move to app direction sing cmd
 * Project runs with python manage.py runserver.
 * Click On http://127.0.0.1:8000/
