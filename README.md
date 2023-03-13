@@ -1,4 +1,4 @@
-# Jobboard - Job Application Portal
+# JobBoard - Job Application Portal
 
 Designed and developed Job  Application Portal using Python, Django Framework, Bootstrap and MySQL as part of a Web Application. Created functionalities for Admin roles. 
 
