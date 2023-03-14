@@ -12,7 +12,7 @@ Admin can:
 * View Job List
 
 
-## Getting Started
+## Technologies Used
 
 * Python 3+
 * MySQL
