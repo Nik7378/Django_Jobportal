@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block data %}
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('static/images/hero_1.jpg');"
+  id="home-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1 class="text-white font-weight-bold">Feedback</h1>
+        <div class="custom-breadcrumbs">
+          <a href="{% url 'index_page' %}">Home</a> <span class="mx-2 slash">/</span>
+          <span class="text-white"><strong>Feedback</strong></span>
+          <span class="text-white"><strong>{{data.role}}</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="site-section" id="next-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-16 blog-content">
+        <h3 class="mb-4">Feedback Responses</h3>
+        <div class="pt-5">
+          <h3 class="mb-5">{{total_feebacks}} Feedbacks</h3>
+          <ul class="comment-list">
+            {% for d in page_obj %}
+            <li class="comment" style="border: 0px solid gray; border-radius: 8px; padding: 20px;">
+              <div class="vcard bio">
+                <img src="{% static 'images/profile.png' %}" alt="Image placeholder">
+              </div>
+              <div class="comment-body">
+                <!-- {% if user.is_authenticated and user.is_superuser %}
+                  {% if users != None %}
+                      {% for user in users %}
+                      <h3>{{user.first_name}} {{user.last_name}} | <strong><a href="/userdetails/{{user.id}}">@{{user.username}}</a></strong></h3>
+                  {% endfor %}
+                  {% endif %}
+                  {% endif %} -->
+                  
+                <h3>{{d.first_name}} {{d.last_name}} | <strong>
+                <a href="{% url 'user_details' d.user_name %}">@{{d.user_name | truncatechars:20}}</a></strong></h3>
+                <div><strong>
+                    <p class="badge badge-secondary">{{d.post_date | naturaltime }}</p> | <a
+                      href="{{d.email_id}}">{{d.email_id}}</a>
+                  </strong></div>
+                <div style="margin-top: 10;" class="break">
+                  <strong>Subject:</strong> {{d.subject}}<br>
+                  <strong>Message:</strong> {{d.message}}
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+          <!-- END comment-list -->
+        </div>
+      </div>
+    </div>
+    <br>
+    {% if total_feebacks > 0 %}
+    <div class="row pagination-wrap">
+      <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
+        <span>Showing {{page_obj.number}} - {{page_obj.paginator.num_pages}} Of {{total_feebacks}} Feedbacks</span>
+      </div>
+      <div class="col-md-6 text-center text-md-right">
+        <div class="custom-pagination ml-auto">
+          {% if page_obj.has_previous %}
+          <a href="?page={{page_obj.previous_page_number}}" class="prev">Prev</a>
+          {% endif %}
+          {% for num_page in page_obj.paginator.page_range %}
+          {% if page_obj.number == num_page %}
+          <div class="d-inline-block">
+            <a href="?page={{ num_page }}" class="active">{{ num_page }}</a>
+          </div>
+          {% else %}
+          <div class="d-inline-block">
+            <a href="?page={{ num_page }}" class="">{{ num_page }}</a>
+          </div>
+          {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+          <a href="?page={{page_obj.next_page_number}}" class="next">Next</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+</section>
+{% endblock data %}

@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block data %}
+<!-- HOME -->
+<section class="section-hero overlay inner-page bg-image"
+  style="background-image: url('static/images/hero_1.jpg');" id="home-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1 class="text-white font-weight-bold">Sign Up</h1>
+        <div class="custom-breadcrumbs">
+          <a href="{% url 'index_page' %}">Home</a> <span class="mx-2 slash">/</span>
+          <span class="text-white"><strong>Sign Up</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="site-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mb-5">
+        <h2 class="mb-4">Sign Up To JobBoard</h2>
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>{{ message }}!</strong>
+        </div>
+        {% endfor %}
+        <form method="post" action="{% url 'handle_signup' %}" class="p-4 border rounded">
+          {% csrf_token %}
+          <div class="row form-group">
+            <div class="col-md-12 mb-3 mb-md-0">
+              <label class="text-black" for="fname">Username</label>
+              <input type="text" id="fname" name="username" class="form-control"
+                placeholder="Enter Unique Username (Lowercase & Alphanumeric)" required />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-12 mb-3 mb-md-0">
+              <label class="text-black" for="fname">First Name</label>
+              <input type="text" id="fname" name="fname" class="form-control" placeholder="Enter First Name" required />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-12 mb-3 mb-md-0">
+              <label class="text-black" for="fname">Last Name</label>
+              <input type="text" id="fname" name="lname" class="form-control" placeholder="Enter Last Name" required />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-12 mb-3 mb-md-0">
+              <label class="text-black" for="fname">Email</label>
+              <input type="email" id="fname" name="email" class="form-control" placeholder="Enter Email address"
+                required />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-12 mb-3 mb-md-0">
+              <label class="text-black" for="fname">Password</label>
+              <input type="password" id="fname" name="pass1" class="form-control" placeholder="Enter Password"
+                required />
+            </div>
+          </div>
+          <div class="row form-group mb-4">
+            <div class="col-md-12 mb-3 mb-md-0">
+              <label class="text-black" for="fname">Re-Type Password</label>
+              <input type="password" id="fname" name="pass2" class="form-control" placeholder="Re-type Password"
+                required />
+            </div>
+          </div>
+          <div class="row form-group mb-4">
+            <div class="col-md-12 mb-3 mb-md-0">
+              <label class="text-black" for="fname">Captcha</label>
+              <script src="https://www.google.com/recaptcha/api.js"></script>
+              <script type="text/javascript">
+                // Submit function to be called, after reCAPTCHA was successful.
+                var onSubmit_27701ebf459c4859989146e1735a6cb5 = function (
+                  token
+                ) {
+                  console.log(
+                    "reCAPTCHA validated for 'data-widget-uuid=\"27701ebf459c4859989146e1735a6cb5\"'"
+                  );
+                };
+              </script>
+              <div class="g-recaptcha" data-sitekey={{ settings.RECAPTCHA_PUBLIC_KEY }} required id=" id_captcha"
+                data-widget-uuid="27701ebf459c4859989146e1735a6cb5"
+                data-callback="onSubmit_27701ebf459c4859989146e1735a6cb5" data-size="normal"></div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-12">
+              <input type="submit" value="Sign Up" class="btn px-4 btn-primary text-white" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-12 mt-3 mb-3 mb-md-0">
+              <label class="text-black" for="fname">Already have an account?</label>&nbsp&nbsp&nbsp
+              <a href="{% url 'login_page' %}" class="btn btn-primary border-width-2 d-none d-lg-inline-block">Log In</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock data %}

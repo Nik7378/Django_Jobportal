@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block data %}
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('static/images/hero_1.jpg');"
+  id="home-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1 class="text-white font-weight-bold">Filter Jobs</h1>
+        <div class="custom-breadcrumbs">
+          <a href="{% url 'index_page' %}">Home</a> <span class="mx-2 slash">/</span>
+          <a href="{% url 'view_all_jobs' %}">Job Listing</a> <span class="mx-2 slash">/</span>
+          <span class="text-white"><strong>Filter Job</strong></span>
+          <span class="text-white"><strong>{{data.role}}</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="site-section">
+  <div class="container">
+    <div class="row align-items-center mb-5">
+      <div class="col-lg-8 mb-4 mb-lg-0">
+        <div class="d-flex align-items-center">
+          <div>
+            <h2>Filter A Job</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% comment %} <form method="get" action="{% url 'filter_job_by_location' %}" class="search-jobs-form">
+      <div class="row mb-5">
+        <div class="col-12 col-sm-6 col-md-6 col-lg-9 mb-4 mb-lg-0">
+          <input type="text" name="joblocation" class="form-control form-control-lg"
+            placeholder="Enter location, city...">
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+          <button type="submit" class="btn btn-block btn-primary btn-md"><span
+              class="icon-search icon mr-2"></span>Search by location</button>
+        </div>
+      </div>
+    </form> {% endcomment %}
+    <form method="get" action="{% url 'filter_job_by_degree' %}" class="search-jobs-form">
+      <div class="row mb-5">
+        <div class="col-12 col-sm-6 col-md-6 col-lg-9 mb-4 mb-lg-0">
+          <input type="text" name="degree" class="form-control form-control-lg" placeholder="Enter name of degree">
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+          <button type="submit" class="btn btn-block btn-primary btn-md"><span
+              class="icon-search icon mr-2"></span>Filter by degree</button>
+        </div>
+      </div>
+    </form>
+    <form method="get" action="{% url 'filter_job_by_batch' %}" class="search-jobs-form">
+      <div class="row mb-5">
+        <div class="col-12 col-sm-6 col-md-6 col-lg-9 mb-4 mb-lg-0">
+          <input type="text" name="batch" class="form-control form-control-lg" placeholder="Enter year of passing">
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+          <button type="submit" class="btn btn-block btn-primary btn-md"><span
+              class="icon-search icon mr-2"></span>Filter by batch</button>
+        </div>
+      </div>
+    </form>
+    <br>
+    <div class="col-15">
+      <a href="{% url 'sort_job_by_date' %}" class="btn btn-block btn-primary btn-md">Sort by Date</a>
+    </div>
+  </div>
+  <br><br>
+  <div class="container">
+    {% if not data %}
+    <div class="row mb-5">
+      <div class="col-md-10 mx-5">
+        <h3>Your search - "<b>{{st}}</b>" ... - did not match any documents.</h3>
+        <h4>Suggestions:</h4>
+        <ul>
+        <li><h4>Make sure that all words are spelled correctly.<h4></li>
+        <li><h4>Try different keywords.<h4></li>
+        <li><h4>Try more general keywords.<h4></li>
+        </ul>
+      </div>
+    </div>
+    {% else %}
+    <div class="row mb-5 justify-content-center">
+      <div class="col-md-7 text-center">
+        <h2 class="section-title mb-2">{{total_jobs}} Job Listed</h2>
+      </div>
+    </div>
+    <br>
+    {% for d in data %}
+    <ul class="job-listings mb-0">
+      <li class="job-listing d-block d-sm-flex pb-3 mb-5 pb-sm-0 align-items-center">
+        <a href="{% url 'get_job' slug=d.slug %}"></a>
+        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+          <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+            <h1>{{d.role}}</h1>
+            <strong>{{d.company_name}} </strong>|
+            <strong> {{d.qualification}} </strong>|
+            <strong> {{d.yop|cut:"["|cut:"]"|cut:"'"}} </strong>|
+            <strong> {{d.salary}} LPA </strong>|
+            <br>
+            <strong>{{d.views}} views . {{d.last_modified | naturaltime}} </strong>
+          </div>
+          <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+            <span class="icon-room"></span> {{d.job_location}}
+          </div>
+          <div class="job-listing-meta">
+            <span class="badge badge-danger">{{d.category}}</span>
+          </div>
+        </div>
+      </li>
+      <br>
+      {% endfor %}
+  {% endif %}
+  <div class="col-15">
+    <a href="{% url 'index_page' %}" class="btn btn-block btn-primary btn-md">Back To Home</a>
+  </div>
+</div>
+  </div>
+  </div>
+</section>
+{% endblock data %}

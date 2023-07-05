@@ -1,0 +1,167 @@
+{% load static %}
+{% load job_tags %}
+<html>
+<head>
+  <title>Jobboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Free-Template.co" />
+  <link rel="shortcut icon" href="{% static 'images/ftco-32x32.png' %}">
+
+  <link rel="stylesheet" href="{% static 'css/custom-bs.css' %}">
+  <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-select.min.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/line-icons/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/mycss.css' %}">
+
+  <!-- SCRIPTS -->
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'js/stickyfill.min.js' %}"></script>
+  <script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-select.min.js' %}"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+  <script src="{% static 'js/myjs.js' %}"></script>
+
+  <!-- MAIN CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body id="top">
+  <div id="overlayer"></div>
+  <div class="loader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+  <div class="site-wrap">
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+    <!-- NAVBAR -->
+    <header class="site-navbar mt-3">
+      <div class="container-fluid" style="padding-left: -7rem;padding-right: 3rem;margin-top: 30px;">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+          <strong>{{ message }}!</strong>
+        </div>
+        {% endfor %}
+        <div class="row align-items-center">
+          <div class="site-logo col-15" style="margin-left: -40px;"><a href="{% url 'index_page' %}">JobBoard</a></div>
+          <nav class="site-navigation" style="margin-left: -100px;">
+            <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0" style="margin-top: 3px;margin-right:-72px">
+              <li><a href="{% url 'index_page' %}" class="nav-link {% block homeactive %}{% endblock homeactive %}">Home</a></li>
+              <li><a href="{% url 'filter_job_page' %}" class="nav-link {% block filteractive %}{% endblock filteractive %}">Filter Job</a></li>
+              <li><a href="{% url 'view_all_jobs' %}" class="nav-link {% block joblistactive %}{% endblock joblistactive %}">Job Listings</a></li>
+              {% if user.is_authenticated and user.is_superuser%}
+              <li><a href="{% url 'feedback_page' %}" class="nav-link {% block feedbackactive %}{% endblock feedbackactive %}">Feeback</a></li>
+              {% endif %}
+              {% if user.is_authenticated %}
+              <li><a href="{% url 'favourite_joblist' %}" class="nav-link {% block savedactive %}{% endblock savedactive %}">Saved Jobs</a></li>
+              {% endif %}
+              <li><a href="{% url 'contact_page' %}" class="nav-link {% block contactactive %}{% endblock contactactive %}">Contact</a></li>
+              <li><a href="{% url 'about_page' %}" class="nav-link {% block aboutactive %}{% endblock aboutactive %}">About</a></li>
+              <li class="d-lg-none"><a href="{% url 'add_job' %}"><span class="mr-2">+</span> Post a Job</a></li>
+              <li class="d-lg-none"><a href="{% url 'login_page'%}">Log In</a></li>
+            </ul>
+          </nav>
+
+          <div class="ml-auto" style="margin-right: -25px;">
+            {% if user.is_authenticated and user.is_superuser or user.is_staff%}
+            <a href="{% url 'add_job' %}" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span
+                class="mr-2 icon-add"></span>Post a Job</a>
+            <a href="{% url 'user_profile' request.user.username %}" class="btn btn-primary border-width-2 d-none d-lg-inline-block hovertext">
+            <img src="{% static 'images/profile.png' %}" class="mr-2" id="profile-img" alt="Image placeholder">@{{request.user | truncatechars:10}}
+            {% if request.user.username|length > 10 %}
+            <span class="linetext">@{{request.user}}</span>
+            {% endif %}
+            </a>
+            <a href="{% url 'handle_logout' %}" class="btn btn-primary border-width-2 d-none d-lg-inline-block">Logout</a>
+          </div>
+          {% elif user.is_authenticated%}
+          <a href="{% url 'user_profile' request.user.username %}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><img
+              src="{% static 'images/profile.png' %}" class="mr-2" id="profile-img"
+              alt="Image placeholder">@{{request.user | truncatechars:10}}</a>
+          <a href="{% url 'handle_logout' %}" class="btn btn-primary border-width-2 d-none d-lg-inline-block">Logout</a>
+        </div>
+        {% else %}
+        <div class="ml-auto">
+          <a href="{% url 'signup_page' %}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
+              class="mr-2 icon-lock_outline"></span>Sign Up</a>
+          <a href="{% url 'login_page' %}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
+              class="mr-2 icon-lock_outline"></span>Log In</a>
+        </div>
+        {% endif %}
+        <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span
+            class="icon-menu h3 m-0 p-0 mt-2"></span></a>
+      </div>
+  </div>
+  </div>
+  </header>
+  <section class="home-section section-hero overlay bg-image"
+    style="background-image: url({% static 'images/hero_1.jpg' %});" id="home-section">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-12">
+          <div class="mb-5 text-center">
+            <h1 class="text-white font-weight-bold">The Easiest Way To Get Your Dream Job</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate est, consequuntur perferendis.</p>
+          </div>
+              <form method="get" action="{% url 'search_job' %}" class="search-jobs-form">
+              <div class="row mb-5">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <input type="text" name="searchbytc" class="form-control form-control-lg" placeholder="Job title, Company...">
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <select class="selectpicker" name="searchbylocation" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Select Region">
+                    <option>Mumbai</option>
+                    <option>Navi Mumbai</option>
+                    <option>Andheri</option>
+                    <option>Thane</option>
+                    <option>Borivali</option>
+                    <option>Pune</option>
+                  </select>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <select class="selectpicker" name="searchbytype" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Select Job Type">
+                    <option>Entry Level</option>
+                    <option>Mid Level</option>
+                    <option>Senior Level</option>
+                  </select>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search"><span class="icon-search icon mr-2"></span>Search Job</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 popular-keywords">
+                  <h1>{% show_trending_job %}</h1>
+                </div>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+    <a href="#next" class="scroll-button smoothscroll">
+      <span class=" icon-keyboard_arrow_down"></span>
+    </a>
+  </section>
+  

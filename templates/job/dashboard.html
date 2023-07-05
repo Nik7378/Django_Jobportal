@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block data %}
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('static/images/hero_1.jpg');"
+  id="home-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1 class="text-white font-weight-bold">All Jobs</h1>
+        <div class="custom-breadcrumbs">
+          <a href="{% url 'index_page' %}">Home</a> <span class="mx-2 slash">/</span>
+          <span class="text-white"><strong>Job Listing</strong></span>
+          <span class="text-white"><strong>{{data.role}}</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="site-section">
+  <div class="container">
+    <div class="row mb-5 justify-content-center">
+      <div class="col-md-7 text-center">
+        <h2 class="section-title mb-2">{{ total_jobs }} Jobs Listed</h2>
+      </div>
+    </div>
+    {% for d in page_obj %}
+    <ul class="job-listings mb-0">
+      <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+        <a href="{% url 'get_job' slug=d.slug %}"></a>
+
+        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+          <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+            <h1>{{d.role}}</h1>
+            <strong>{{d.company_name}} </strong>|
+            <strong> {{d.qualification}} </strong>|
+            <strong> {{d.yop|cut:"["|cut:"]"|cut:"'"}} </strong>|
+            <strong> {{d.salary}} LPA </strong>|
+            <br>
+            <strong>{{d.views}} views . {{d.last_modified | naturaltime}} </strong>
+          </div>
+          <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+            <span class="icon-room"></span> {{d.job_location}}
+          </div>
+          <div class="job-listing-meta">
+            <span class="badge badge-danger">{{d.category}}</span>
+          </div>
+        </div>
+      </li>
+      <br /><br /><br />
+      {% if user.is_authenticated and user.is_superuser or user.is_staff %}
+      <div style="position: absolute; top: 40px; right: 80px">
+        <form action="{% url 'edit_job' slug=d.slug %}">
+          <input type="submit" value="Update" class="btn btn-primary border-width-2 d-none d-lg-inline-block" />
+        </form>
+      </div>
+
+      <div style="position: absolute; top: 40px; right: 0px">
+        <form action="{% url 'delete_job' slug=d.slug %}">
+          <input type="submit" value="Delete" class="btn btn-primary border-width-2 d-none d-lg-inline-block" />
+        </form>
+      </div>
+      {% else %}
+    </ul>
+    {% endif %}
+    {% endfor %}
+    {% if total_jobs > 0 %}
+    <div class="row pagination-wrap">
+      <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
+        <span>Showing {{page_obj.number}} - {{page_obj.paginator.num_pages}} Of {{ total_jobs }} Jobs</span>
+      </div>
+      <div class="col-md-6 text-center text-md-right">
+        <div class="custom-pagination ml-auto">
+          {% if page_obj.has_previous %}
+          <a href="?page={{page_obj.previous_page_number}}" class="prev">Prev</a>
+          {% endif %}
+          {% for num_page in page_obj.paginator.page_range %}
+          {% if page_obj.number == num_page %}
+          <div class="d-inline-block">
+            <a href="?page={{ num_page }}" class="active">{{ num_page }}</a>
+          </div>
+          {% else %}
+          <div class="d-inline-block">
+            <a href="?page={{ num_page }}" class="">{{ num_page }}</a>
+          </div>
+          {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+          <a href="?page={{page_obj.next_page_number}}" class="next">Next</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <br><br>
+    <div class="col-15">
+      <a href="{% url 'index_page' %}" class="btn btn-block btn-primary btn-md">Back To Home</a>
+    </div>
+    </div>
+</section>
+{% endblock data%}

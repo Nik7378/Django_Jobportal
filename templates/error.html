@@ -1,0 +1,47 @@
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>403 Forbidden</title>
+  <style type="text/css">
+    a:link {
+      font-family: verdana, arial, helvetica, sans-serif;
+      color: #89ba16e6;
+    }
+
+    a:visited {
+      font-family: verdana, arial, helvetica, sans-serif;
+      color: #89ba16e6;
+    }
+
+    a:active {
+      font-family: verdana, arial, helvetica, sans-serif;
+      color: #89ba16e6;
+    }
+  </style>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" style="font-family: verdana, arial, helvetica, sans-serif">
+  <center>
+    <h1 style="color: #89ba16e6">403 Forbidden</h1>
+    <table border="0" align="center" style="margin-top: 50px">
+      <tr>
+        <td>
+          <img src="{% static 'images/question-mark.png' %}" width="40" height="35" border="0" />
+        </td>
+        <td>
+          <b style="color: #89ba16e6">Looking for something?</b>
+          <br />
+          We're sorry. you are not allowed to proceed.
+          <br /><br />
+          <img src="{% static 'images/arrow-64.png' %}" width="15" height="15" border="0" />
+          <b><a href="{% url 'index_page' %}" style="color: #89ba16e6">Click here to go back to the Jobportal home page</a></b>
+        </td>
+      </tr>
+    </table>
+  </center>
+</body>
+
+</html>
