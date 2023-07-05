@@ -3,5 +3,5 @@
 # error.log  
 
 # directory ignore
-# dir/
+dir/abc.txt
 # static/dir
