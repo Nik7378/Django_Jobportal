@@ -9,9 +9,8 @@
         <h1 class="text-white font-weight-bold">Change Password</h1>
         <div class="custom-breadcrumbs">
           <a href="{% url 'index_page' %}">Home</a> <span class="mx-2 slash">/</span>
-          <a href="{% url 'change_user_passwd' %}">Change Password</a>
-          <span class="mx-2 slash"></span>
-          <span class="text-white"><strong>{{data.role}}</strong></span>
+          {% comment %} <a href="{% url 'change_user_passwd' %}">Change Password</a> {% endcomment %}
+          <span class="text-white"><strong>Change Password</strong></span>
         </div>
       </div>
     </div>
@@ -27,7 +26,7 @@
           {% for error in form.non_field_errors %}
           <p>{{error}}</p>
           {% endfor %} {% endif %}
-          <a href="{% url 'user_profile' %}">
+          <a href="{% url 'user_profile' slug=request.user.username %}">
             <h3 class="text-black mb-5 border-bottom pb-2" style="text-transform: capitalize; text-decoration: none">
               {{request.user}}'s Profile
             </h3>
@@ -57,7 +56,7 @@
                 <a href="{% url 'reset_user_passwd' %}" class="btn btn-block btn-primary btn-md">Forgotten password?</a>
               </div>    
               <div class="col-4">
-                <a href="{% url 'user_profile' %}" class="btn btn-block btn-primary btn-md">Cancel</a>
+                <a href="{% url 'user_profile' slug=request.user.username %}" class="btn btn-block btn-primary btn-md">Cancel</a>
               </div>
               <div class="col-4">
                 <input type="submit" name="send" value="Save" class="btn btn-block btn-primary btn-md" />

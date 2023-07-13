@@ -91,7 +91,7 @@ def user_profile(request, slug):
             if fm.is_valid():
                 messages.success(request, "Your profile has been successfully updated")
                 fm.save()
-                return redirect('user_profile')
+                return redirect('user_profile', slug=request.user.username)
         else:     
             if request.user.is_superuser == True:
                 fm = EditAdminProfileForm(instance=request.user)
@@ -291,7 +291,7 @@ def edit_job(request, slug):
                 return redirect('view_all_jobs')
         else:
             fm = jobapply(instance=j1)
-        return render(request, 'job/edit_job.html', {'form': fm})
+        return render(request, 'job/edit_job.html', {'form': fm,'data':job.objects.get(slug=slug)})
     else:
         return render(request, 'error.html')
 

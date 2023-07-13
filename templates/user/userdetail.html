@@ -9,7 +9,7 @@
         <h1 class="text-white font-weight-bold">User Profile</h1>
         <div class="custom-breadcrumbs">
           <a href="{% url 'index_page' %}">Home</a> <span class="mx-2 slash">/</span>
-          <a href="{% url 'user_profile' user.username %}">User Profile</a> <span class="mx-2 slash">/</span>
+          <a href="{% url 'user_profile' request.user.username %}">Profile</a> <span class="mx-2 slash">/</span>
           <span class="text-white"><strong>{{user.username | truncatechars:10}}</strong></span>
         </div>
       </div>
@@ -52,7 +52,7 @@
           <div class="col-lg-4 ml-auto">
             <div class="row">
               <div class="col-6">
-                <a href="{% url 'user_profile' user.username%}" class="btn btn-block btn-primary btn-md"><span
+                <a href="{% url 'user_profile' request.user.username %}" class="btn btn-block btn-primary btn-md"><span
                     class="icon-open_in_new mr-2"></span>Back</a>
               </div>
               <div class="col-6">

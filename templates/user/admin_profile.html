@@ -9,8 +9,8 @@
         <h1 class="text-white font-weight-bold">Admin Profile</h1>
         <div class="custom-breadcrumbs">
           <a href="{% url 'index_page' %}">Home</a> <span class="mx-2 slash">/</span>
-          <span class="text-white"><strong>Admin Profile</strong></span>
-          <span class="text-white"><strong>{{data.role}}</strong></span>
+          <a href="{% url 'user_profile' request.user.username %}">Profile</a> <span class="mx-2 slash">/</span>
+          <span class="text-white"><strong>{{user.username | truncatechars:10}}</strong></span>
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@
         <h1 class="text-white font-weight-bold">User Profile</h1>
         <div class="custom-breadcrumbs">
           <a href="{% url 'index_page' %}">Home</a> <span class="mx-2 slash">/</span>
-          <a href="{% url 'user_profile' request.user.username %}">User Profile</a>
+          <a href="{% url 'user_profile' request.user.username %}">Profile</a>
           <span class="mx-2 slash">/</span>
           <span class="text-white"><strong>{{request.user | truncatechars:10}}</strong></span>
         </div>

@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-mmk$ad#d2c&89yb$m^du+x+_q5hqmq*i=abzie1$7wi$(b0)kn
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
 
 # enable or disable admin panel
 ADMIN_ENABLED = True
@@ -133,6 +134,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'static')
 ]
+
+STATIC_ROOT = "\jobportal\myapp\static"
+
+#STATIC_ROOT = os.path.join(BASE_DIR,'static/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
