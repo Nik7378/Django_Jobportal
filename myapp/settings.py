@@ -32,7 +32,8 @@ DEBUG = False
 ADMIN_ENABLED = True
 
 # allow host to access site like '127.0.0.1'
-ALLOWED_HOSTS = ['127.0.0.1','localhost', '*']
+# ALLOWED_HOSTS = ['127.0.0.1','localhost', '*']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -89,14 +90,15 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'jobportal',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306'
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'Nikhil_Gawade',
+        'PASSWORD': 'NikJobportal7378',
+        'HOST': 'django-jobportal.cc8nsyehq4pc.us-east-1.rds.amazonaws.com',
+        'PORT': '5432'
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
