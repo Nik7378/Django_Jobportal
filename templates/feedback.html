@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+<title>{% block title %}JobPulse|Feedback{% endblock %}</title>
 {% load static %}
 {% load humanize %}
 {% block data %}
@@ -17,7 +18,7 @@
     </div>
   </div>
 </section>
-<section class="site-section" id="next-section">
+<section class="site-section" id="next">
   <div class="container">
     <div class="row">
       <div class="col-lg-16 blog-content">
@@ -43,7 +44,7 @@
                 <a href="{% url 'user_details' d.user_name %}">@{{d.user_name | truncatechars:20}}</a></strong></h3>
                 <div><strong>
                     <p class="badge badge-secondary">{{d.post_date | naturaltime }}</p> | <a
-                      href="{{d.email_id}}">{{d.email_id}}</a>
+                      href="mailto:{{d.email_id}}">{{d.email_id}}</a>
                   </strong></div>
                 <div style="margin-top: 10;" class="break">
                   <strong>Subject:</strong> {{d.subject}}<br>

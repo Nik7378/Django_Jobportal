@@ -448,7 +448,7 @@ def contact_page(request):
                 Current_date = datetime.now().date()  
                 Current_time = datetime.now().time()
                 # j2.user_name = User.objects.create(username="Guest_"+str(Current_date)+"_"+str(Current_time), is_active=0)
-                j2.user_name = User.objects.create(username="Guest_"+str(x), is_active=0)
+                j2.user_name = User.objects.create(username="Anonymous_User_"+str(x), is_active=0)
             j2.save() 
             messages.success(request, "Your feedback has been successfully received. We'll get back to you soon")
             return redirect('index_page')

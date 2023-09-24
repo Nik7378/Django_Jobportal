@@ -22,7 +22,7 @@ urlpatterns = [
     # path('admin/login', views.handlelogin, name="login"),
     # path('admin/logout', views.handlelogout, name="logout"),
     # path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
-    path('jobboard-admin-panel/', admin.site.urls),
+    path('jobpulse-admin-panel/', admin.site.urls),
     path('', include('app1.urls'))
-    # path('jobboard/', include('app1.urls'))
+    #path('jobpulse', include('app1.urls'))
 ]

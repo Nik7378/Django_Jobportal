@@ -20,9 +20,9 @@ class job_admin(admin.ModelAdmin):
     # list_editable = ['id'] 
 
 admin.site.register(job, job_admin)
-admin.site.site_header = "JobBoard Admin Panel"
+admin.site.site_header = "JobPulse Admin Panel"
 admin.site.site_title = "Job"
-admin.site.index_title = "Welcome To JobBoard Admin Panel"
+admin.site.index_title = "Welcome To JobPulse Admin Panel"
 
 
 class Contact_admin(admin.ModelAdmin):
@@ -37,9 +37,9 @@ class Contact_admin(admin.ModelAdmin):
     # search_fields = ['id','user_name', 'first_name', 'last_name', 'email_id']
 
 admin.site.register(Contact, Contact_admin)
-admin.site.site_header = "JobBoard Admin Panel"
+admin.site.site_header = "JobPulse Admin Panel"
 admin.site.site_title = "Contact"
-admin.site.index_title = "Welcome To JobBoard Admin Panel"
+admin.site.index_title = "Welcome To JobPulse Admin Panel"
 
 
 class DjangoUser(User):

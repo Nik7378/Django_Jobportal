@@ -2,7 +2,6 @@
 {% load job_tags %}
 <html>
 <head>
-  <title>Jobboard</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="" />
@@ -65,7 +64,9 @@
         </div>
         {% endfor %}
         <div class="row align-items-center">
-          <div class="site-logo col-15" style="margin-left: -40px;"><a href="{% url 'index_page' %}">JobBoard</a></div>
+          <div class="site-logo col-15" style="margin-left: -40px;"><a href="{% url 'index_page' %}">
+            <img src="{% static 'images/jobpulse-icon.png' %}" alt="JobPulse" style="width:140px; height:55px; border-radius:10px;">
+          </a></div>
           <nav class="site-navigation" style="margin-left: -100px;">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0" style="margin-top: 3px;margin-right:-72px">
               <li><a href="{% url 'index_page' %}" class="nav-link {% block homeactive %}{% endblock homeactive %}">Home</a></li>

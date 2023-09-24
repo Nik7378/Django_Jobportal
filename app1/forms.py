@@ -26,6 +26,8 @@ class jobapply(forms.ModelForm):
     #yop = forms.MultipleChoiceField(choices=yop_ch, widget=forms.SelectMultiple())
     #yop = forms.ModelMultipleChoiceField(queryset=job.objects.get('yop'), widget=forms.CheckboxSelectMultiple())
 
+    required_css_class = 'required'
+
     class Meta:
         model = job
 
@@ -63,6 +65,7 @@ class jobapply(forms.ModelForm):
 class EditUserProfileForm(UserChangeForm):
     password = None
     slug = AutoSlugField(populate_from='User.username', max_length=200, unique=True, null=True, editable=False)
+    required_css_class = 'required'
 
     class Meta:
         model = User
@@ -76,6 +79,8 @@ class EditUserProfileForm(UserChangeForm):
 class EditAdminProfileForm(UserChangeForm):
     password = None
     slug = AutoSlugField(populate_from='User.username', max_length=200, unique=True, null=True, editable=False)
+    required_css_class = 'required'
+
     class Meta:
         model = User
         labels = {
@@ -88,6 +93,7 @@ class EditAdminProfileForm(UserChangeForm):
 class ContactForm(forms.ModelForm):
     message = forms.CharField(label='Message', widget=forms.Textarea(attrs={"rows":"7", 'placeholder': 'Write your notes or questions here...'}))
     captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+    required_css_class = 'required'
 
     class Meta:
         model = Contact
