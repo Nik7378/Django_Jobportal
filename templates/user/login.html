@@ -2,7 +2,7 @@
 <title>{% block title %}JobPulse|Sign-In{% endblock %}</title>
 {% load static %}
 {% block data %}
-<!-- HOME -->
+{{ redirect_to_login_immediately }}
 <section class="section-hero overlay inner-page bg-image" style="background-image: url('static/images/hero_1.jpg');"
   id="home-section">
   <div class="container">
@@ -62,3 +62,4 @@
   </div>
 </section>
 {% endblock data %}
+

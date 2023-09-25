@@ -4,4 +4,8 @@
 
 # directory ignore
 # dir/abc.txt
+<<<<<<< HEAD
 # static/dir
+=======
+# static/dir
+>>>>>>> master

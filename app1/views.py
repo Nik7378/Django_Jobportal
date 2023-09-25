@@ -27,7 +27,7 @@ import uuid
 @login_required(login_url="handle_login")
 def favourite_joblist(request):
     if request.user.is_authenticated:
-        content = job.objects.filter(favourites=request.user)
+        content = job.objects.filter(favourites=request.user)[::-1]
         paginator = Paginator(content, 5, orphans=1)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
@@ -216,6 +216,8 @@ def handle_login(request):
         if user is not None:
             request.session['email'] = email
             login(request, user)
+            # request.session.set_expiry(20) # 3600 for expired in 1hr and 0 for expire when browser closed
+            # if request.session.get_session_cookie_age() != 0:
             # return HttpResponse("Login Success")
             #v = request.session.get('email')
             #return render(request, 'header.html', {'value':v})

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -60,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django_auto_logout.middleware.auto_logout',
 
 ]
 
@@ -77,6 +79,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django_settings_export.settings_export',
+                'django_auto_logout.context_processors.auto_logout_client',
             ],
         },
     },
@@ -171,3 +174,11 @@ RECAPTCHA_PRIVATE_KEY = '6LfU9KkmAAAAALFoociTMy-InPTPKcZWdACFMRvl'
 SETTINGS_EXPORT = [
     'RECAPTCHA_PUBLIC_KEY',
 ]
+
+AUTO_LOGOUT = {
+    # 'IDLE_TIME': timedelta(minutes=5),
+    # 'SESSION_TIME': timedelta(minutes=30),
+    'SESSION_TIME': 3600,
+    'MESSAGE': 'The session has expired. Please login again to continue.',
+    'REDIRECT_TO_LOGIN_IMMEDIATELY': True,
+}
